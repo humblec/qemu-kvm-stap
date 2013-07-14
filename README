@@ -2,4 +2,4 @@
 # Email       : <humble.devassy@gmail.com>
 # Web Site    : http://humblec.com
 
-The systemtap script track i/o on guest
+The systemtap script track i/o on guest disk image. You need a working system tap environment to get this tap script running.
