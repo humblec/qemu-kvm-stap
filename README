@@ -2,4 +2,8 @@
 # Email       : <humble.devassy@gmail.com>
 # Web Site    : http://humblec.com
 
-The systemtap script track i/o on guest disk image. You need a working system tap environment to get this tap script running.
+The systemtap script 'virtio-blk.stp' can track i/o error reported inside kvm guest.
+You need a working system tap environment to get this tap script running.
+
+Read below article to know more about the scenario and other details.
+http://humblec.com/kvm-guest-reports-io-errors-and-filesystem-goes-readonly-how-to-troubleshoot-or-track-it-using-systemtap/
