@@ -63,6 +63,6 @@ probe qemu.kvm.virtio_blk_rw_complete
 
             qiov = @cast(req, "VirtIOBlockReq")->qiov->size$
         
-	    printf ("\n Qemu IO version size: %s",qiov)
+	    printf ("\n Qemu IO vector size: %s",qiov)
      }
 }
