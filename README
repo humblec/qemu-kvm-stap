@@ -6,4 +6,4 @@ The systemtap script 'virtio-blk.stp' can track i/o error reported inside kvm gu
 You need a working system tap environment to get this tap script running.
 
 Read below article to know more about the scenario and other details.
-<link href="http://humblec.com/kvm-guest-reports-io-errors-and-filesystem-goes-readonly-how-to-troubleshoot-or-track-it-using-systemtap/" />
+http://humblec.com/kvm-guest-reports-io-errors-and-filesystem-goes-readonly-how-to-troubleshoot-or-track-it-using-systemtap/
