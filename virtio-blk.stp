@@ -23,46 +23,46 @@
 # This script tracks virtio block read/write complete func for an error,
 # when the i/o errors are reported inside guest.
 # The arg2 in complete function show the error code returned to it.
-# There are 2 possibilities for the caller to return EIO to callee and this 
-# script checks one condition atm. 
+# There are 2 possibilities for the caller to return EIO to callee and this
+# script checks one condition atm.
  
 # You can execute this script as like any other system tap script.
 
-global pfunc
 
 probe qemu.kvm.bdrv_*, qemu.kvm.virtio_blk_*, qemu.kvm.paio_*
 
 {
 
-pfunc = probefunc()
 
-printf(" \n %s -> %s(%s) \n ", thread_indent(1), probefunc(), $$parms )
+printf(" \n -> %s(%s) \n ",  probefunc(), $$parms )
 
 }
+
+
+
 
 probe qemu.kvm.virtio_blk_rw_complete
 
 {
 
-        printf ("\n Return Code Revceived :%d", $arg2)
+        printf ("\n On Virtio Block Request:%p \n Return Code Received :%d", $req, $arg2)
 
-    	if ( arg2 )
-    	{
+	if ( $arg2 )
+     	{
 
             vDevname = @cast(req, "VirtIOBlockReq")->dev->vdev->name$
             
 	    vSerialN = @cast(req, "VirtIOBlockReq")->dev->blk->serial$
             
-	    printf ("\n The Virtio Device : %s \n Serial No: %s", vDevname, vSerialN)
+	    printf ("\n The Virtio Device : %s \n Serial No: %s \n", vDevname, vSerialN)
             
-            printf ("\n The virtio-blk Request::  %p", $req)
 
             l_blk_size = @cast(req, "VirtIOBlockReq")->dev->conf->logical_block_size$
            
-            printf ("\n logical block size: %s", l_blk_size)
 
             qiov = @cast(req, "VirtIOBlockReq")->qiov->size$
         
-	    printf ("\n Qemu IO vector size: %s",qiov)
-     }
+	    printf ("Logical Block Size: %s \n Qemu IO vector size: %s \n", l_blk_size, qiov)
+
+     	}
 }
