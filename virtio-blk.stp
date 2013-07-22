@@ -38,6 +38,7 @@ printf(" \n -> %s(%s) \n ",  probefunc(), $$parms )
 
 }
 
+#req->out->sector & req->dev->sector_mask
 
 
 
@@ -56,13 +57,22 @@ probe qemu.kvm.virtio_blk_rw_complete
             
 	    printf ("\n The Virtio Device : %s \n Serial No: %s \n", vDevname, vSerialN)
             
+	    vDevSector = @cast(req, "VirtIOBlockReq")->out->sector
 
-            l_blk_size = @cast(req, "VirtIOBlockReq")->dev->conf->logical_block_size$
+	    vDevSectorMask = @cast(req, "VirtIOBlockReq")->dev->sector_mask
+
+	    if ( vDevSector & vDevSectorMask)
+	    {
+			printf ("\n Case 1: sector :%d \t\t sector_mask: %d", vDevSector, vDevSectorMask)
+	    } 
+
+            l_blk_size = @cast(req, "VirtIOBlockReq")->dev->conf->logical_block_size
            
-
-            qiov = @cast(req, "VirtIOBlockReq")->qiov->size$
-        
-	    printf ("Logical Block Size: %s \n Qemu IO vector size: %s \n", l_blk_size, qiov)
-
+            qiov = @cast(req, "VirtIOBlockReq")->qiov->size
+           
+            if (l_blk_size & qiov)
+	    {
+	    		printf (" \n Case 2: Logical Block Size: %d \t Qemu IO vector size: %d \n", l_blk_size, qiov)
+	    }
      	}
 }
