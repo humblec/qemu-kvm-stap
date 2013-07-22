@@ -24,7 +24,7 @@
 # when the i/o errors are reported inside guest.
 # The arg2 in complete function show the error code returned to it.
 # There are 2 possibilities for the caller to return EIO to callee and this
-# script checks print more information about both
+# script checks & print more information about both scenarios.
  
 # You can execute this script as like any other system tap script.
 
